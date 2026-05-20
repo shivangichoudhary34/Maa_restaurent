@@ -1,0 +1,402 @@
+
+/* Reset & Luxury Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --gold: #d4af37;        /* Authentic Metallic Gold */
+    --gold-hover: #f1c40f;
+    --dark-royal: #111111;  /* Rich Jet Black */
+    --card-bg: #1a1a1a;     /* Deep Charcoal Luxury Card */
+    --text-light: #f5f6fa;
+    --text-gold: #f39c12;
+}
+
+body {
+    background-color: var(--dark-royal);
+    color: var(--text-light);
+    padding-bottom: 120px;
+}
+
+/* 5-Star Fine Dining Hero Background */
+.hero-section {
+    position: relative;
+    height: 75vh;
+    /* Luxury Fine Dining Candlelight Setup */
+    background: url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&q=80') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(17,17,17,1));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.royal-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+}
+
+.main-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 85px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    color: #ffffff;
+    line-height: 1;
+    margin: 10px 0;
+    text-shadow: 0px 4px 20px rgba(212, 175, 55, 0.3);
+}
+
+.signature-text {
+    font-family: 'Updock', cursive;
+    font-size: 38px;
+    color: var(--gold);
+    margin-top: -5px;
+}
+
+.gold-line {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 20px auto;
+}
+
+.table-luxury-badge {
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--gold);
+    color: #fff;
+    padding: 6px 24px;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.explore-btn {
+    display: inline-block;
+    margin-top: 30px;
+    background: transparent;
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    padding: 12px 40px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.4s all ease;
+}
+
+.explore-btn:hover {
+    background: var(--gold);
+    color: var(--dark-royal);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Menu Gallery Layout */
+.menu-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+.gold-accent-fleur {
+    text-align: center;
+    color: var(--gold);
+    font-size: 12px;
+    margin: 8px 0 35px 0;
+}
+
+/* Horizontal Gold Category Tabs */
+.categories {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px 5px;
+    margin-bottom: 35px;
+}
+.categories::-webkit-scrollbar { display: none; }
+
+.cat-btn {
+    background: #1c1c1c;
+    border: 1px solid #333;
+    color: #aaa;
+    padding: 10px 26px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s all ease;
+}
+
+.cat-btn.active {
+    background: var(--gold);
+    color: var(--dark-royal);
+    border-color: var(--gold);
+    font-weight: bold;
+}
+
+/* Fine-Dining Food Cards */
+.menu-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.menu-item {
+    background: var(--card-bg);
+    border-left: 3px solid var(--gold);
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.food-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    filter: brightness(0.9);
+    transition: 0.4s all ease;
+}
+
+.menu-item:hover .food-img {
+    filter: brightness(1.1);
+}
+
+.item-details {
+    padding: 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-details h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.item-desc {
+    font-size: 11.5px;
+    color: #999;
+    line-height: 1.6;
+    margin: 5px 0;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    color: var(--gold);
+    font-size: 18px;
+}
+
+.add-btn {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 5px 18px;
+    font-size: 11px;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s all ease;
+}
+
+.add-btn:hover {
+    background: var(--gold);
+    color: var(--dark-royal);
+}
+
+/* Luxury Royal Cart Bottom Panel */
+.floating-cart {
+    position: fixed;
+    bottom: 30px; left: 5%; width: 90%; max-width: 720px;
+    background: #0a0a0a;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: white; padding: 15px 30px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+    z-index: 10;
+}
+
+.cart-details {
+    display: flex;
+    flex-direction: column;
+}
+
+#cart-count { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+#cart-total { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold); font-size: 18px; margin-top: 2px; }
+
+.view-cart-btn {
+    background: var(--gold); border: none; color: var(--dark-royal);
+    padding: 10px 25px; font-family: 'Cinzel', serif;
+    font-weight: bold; font-size: 11px; letter-spacing: 1px; cursor: pointer;
+}
+/* --- LUXURY CART MODAL STYLES --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Background blur effect ke liye dark overlay */
+    z-index: 100;
+    display: none; /* Shuruat mein hidden rahega */
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Jab modal open hoga toh yeh class JavaScript se add hogi */
+.modal-overlay.open {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    border: 1px solid var(--gold);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    background: #111;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.modal-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    color: var(--gold);
+    letter-spacing: 1px;
+}
+
+.close-modal {
+    color: #aaa;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.close-modal:hover { color: var(--gold); }
+
+.modal-body {
+    padding: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Individual Item Row inside Cart */
+.cart-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #262626;
+}
+
+.cart-item-name { font-size: 14px; color: #fff; }
+.cart-item-price { font-family: 'Cinzel', serif; color: var(--gold); font-weight: 600; }
+
+.modal-footer {
+    background: #111;
+    padding: 20px;
+    border-top: 1px solid #333;
+}
+
+.modal-total {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.modal-total #modal-grand-total { color: var(--gold); }
+
+.place-order-btn {
+    width: 100%;
+    background: var(--gold);
+    color: var(--dark-royal);
+    border: none;
+    padding: 14px;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s all;
+}
+
+.place-order-btn:hover {
+    background: var(--gold-hover);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+.reset-order-btn {
+    width: 100%;
+    background: transparent;
+    color: #e74c3c; /* Red color for reset/delete action */
+    border: 1px solid #e74c3c;
+    padding: 10px;
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-bottom: 10px; /* Thoda gap main button se */
+    transition: 0.3s all;
+}
+
+.reset-order-btn:hover {
+    background: rgba(231, 76, 60, 0.1);
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.2);
+}

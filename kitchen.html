@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maa Restaurant - Kitchen Display System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #121212; color: #fff; padding: 20px; }
+        h1 { font-family: 'Cinzel', serif; color: #d4af37; text-align: center; margin-bottom: 30px; letter-spacing: 2px; border-bottom: 2px solid #d4af37; padding-bottom: 10px; }
+        .orders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .order-card { background: #1a1a1a; border: 1px solid #333; border-top: 4px solid #d4af37; padding: 15px; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .order-header { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 8px; margin-bottom: 10px; font-weight: bold; }
+        .table-no { color: #d4af37; }
+        .order-items { list-style: none; margin-bottom: 15px; }
+        .order-items li { padding: 5px 0; border-bottom: 1px dashed #222; font-size: 14px; display: flex; justify-content: space-between; }
+        .item-qty { color: #aaa; }
+        .done-btn { width: 100%; background: #218c74; color: white; border: none; padding: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+        .done-btn:hover { background: #1b735f; }
+        #no-orders { text-align: center; color: #555; font-size: 18px; margin-top: 5px; width: 100%; }
+    </style>
+</head>
+<body>
+
+    <h1>Maa Kitchen - Live Orders Panel</h1>
+    
+    <div class="orders-grid" id="kitchen-orders-container">
+        <p id="no-orders">Waiting for new orders from tables... ⏳</p>
+    </div>
+
+<script>
+    function loadLiveOrders() {
+        const container = document.getElementById("kitchen-orders-container");
+        let orders = JSON.parse(localStorage.getItem("maa_restaurant_orders")) || [];
+        
+        if (orders.length === 0) {
+            container.innerHTML = '<p id="no-orders">Waiting for new orders from tables... ⏳</p>';
+            return;
+        }
+        
+        container.innerHTML = ""; 
+        
+        orders.forEach((order, index) => {
+            let itemsHTML = "";
+            order.items.forEach(item => {
+                itemsHTML += `<li><span>👑 ${item.name}</span> <span class="item-qty">x1</span></li>`;
+            });
+            
+            const cardHTML = `
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="table-no">Table: ${order.table}</span>
+                        <span style="color: #aaa; font-size: 12px;">${order.time}</span>
+                    </div>
+                    <ul class="order-items">
+                        ${itemsHTML}
+                    </ul>
+                    <button class="done-btn" onclick="completeOrder(${index})">Served / Done ✓</button>
+                </div>
+            `;
+            container.innerHTML += cardHTML;
+        });
+    }
+
+    function completeOrder(index) {
+        let orders = JSON.parse(localStorage.getItem("maa_restaurant_orders")) || [];
+        orders.splice(index, 1); 
+        localStorage.setItem("maa_restaurant_orders", JSON.stringify(orders));
+        loadLiveOrders(); 
+    }
+
+    // --- REALTIME SIGNAL RECEIVER ---
+    // Jaise hi customer wale tab se koi order place hoga, yeh function bina kisi delay ke instantly chal padega!
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'order_signal' || e.key === 'maa_restaurant_orders') {
+            loadLiveOrders();
+        }
+    });
+
+    // Har 1 second mein backup fetch lagaya hai
+    setInterval(loadLiveOrders, 1000);
+    window.onload = loadLiveOrders;
+</script>
+</body>
+</html>
