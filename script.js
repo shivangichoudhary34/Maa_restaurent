@@ -8,7 +8,7 @@ const menuItems = [
         category: "Starters", 
         price: 90, 
         desc: "Golden-crisp artisanal kachoris stuffed with fine spiced lentils, accompanied by heirloom sour potato gravy.", 
-        img : "Kachori.jpg"// Perfect Kachori/Samosa street starter image
+        img : "kachori.jpg"// Perfect Kachori/Samosa street starter image
     },
     // --- VEG STARTERS & MAIN COURSE ---
 { 
@@ -17,7 +17,7 @@ const menuItems = [
     category: "Main Course", 
     price: 260, 
     desc: "Soya chaap marinated in rich fresh cream, cashew paste, and secret spices, grilled in a traditional clay oven.", 
-    img : "tandoori Malai Chaap.jpg" 
+    img : "tandoori Malai chaap.jpg" 
 },
 
 // --- NON-VEG DISHES ---
@@ -301,6 +301,9 @@ function showPaymentAndOrder() {
     orderBtn.setAttribute("onclick", "placeFinalOrderWithPayment()");
 }
 
+// Global variable to hold URL safely
+let globalWhatsAppURL = "";
+
 function placeFinalOrderWithPayment() {
     const tableNum = document.getElementById("table-number").innerText;
     let total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -310,10 +313,8 @@ function placeFinalOrderWithPayment() {
         return;
     }
 
-    // 1. WhatsApp Number (Aapka dynamic setup)
-    const restaurantWhatsapp = "916305450796"; 
+    const restaurantWhatsapp = "919876543210"; // <--- Put your real number here
 
-    // 2. Text Message Format
     let messageText = `*👑 NEW ORDER - MAA RESTAURANT 👑*\n`;
     messageText += `----------------------------------\n`;
     messageText += `📍 *Table Number:* ${tableNum}\n`;
@@ -329,36 +330,36 @@ function placeFinalOrderWithPayment() {
     messageText += `💰 *Grand Total:* ₹${total}\n`;
     messageText += `✅ *Payment Status:* Done via UPI\n`;
     messageText += `----------------------------------\n`;
-    messageText += `_Maa Kitchen_your order is Ready!_`;
+    messageText += `_Maa Ki Rasoi mein khana taiyar karein!_`;
 
-    const whatsappURL = `https://api.whatsapp.com/send?phone=${restaurantWhatsapp}&text=${encodeURIComponent(messageText)}`;
+    // Save URL to global variable
+    globalWhatsAppURL = `https://api.whatsapp.com/send?phone=${restaurantWhatsapp}&text=${encodeURIComponent(messageText)}`;
 
-    // --- FIX: PEHLE THANK YOU POPUP DIKHAO ---
-    closeCartModal(); // Cart ko band karo
-    document.getElementById("thank-you-modal").classList.add("open"); // Thank You screen on karo
-
-    // --- SMART DELAY TRICK ---
-    // 1.5 second (1500 milliseconds) ka halt lagayenge taaki customer ko pehle "Thank You & Visit Again" dikh jaye, 
-    // uske baad WhatsApp apne aap automatic background se trigger ho jayega.
-    setTimeout(() => {
-        window.open(whatsappURL, '_blank');
-    }, 1500);
-
-    // Cart aur UI ko clear kar do future customer ke liye
+    // STEP 1: Pehle Cart band karo aur Direct Thank You Page open karo
+    closeCartModal(); 
+    document.getElementById("thank-you-modal").classList.add("open"); 
+    
+    // Background Reset
     cart = [];
     document.getElementById("cart-count").innerText = "0 Gold Plates Selected";
     document.getElementById("cart-total").innerText = "Grand Total: ₹0";
     document.getElementById("payment-section").style.display = "none";
     
-    // Main order button ko wapas default state mein le aao
     const orderBtn = document.getElementById("main-order-btn");
     orderBtn.innerText = "Proceed to Payment 💳";
     orderBtn.style.background = "var(--gold)";
     orderBtn.setAttribute("onclick", "showPaymentAndOrder()");
 }
-// Is function ko script.js ke sabse niche copy-paste karein:
+
+// Function: Jab user green button dabaye, tab WhatsApp par bhejo
+function redirectToWhatsApp() {
+    if(globalWhatsAppURL !== "") {
+        window.open(globalWhatsAppURL, '_blank');
+    }
+}
+
+// Function: Thank you modal band karne aur back to menu ke liye
 function closeThankYouModal() {
-    // Thank you modal se 'open' class ko hatao taaki wo band ho jaye
     document.getElementById("thank-you-modal").classList.remove("open");
 }
     
