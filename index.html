@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +37,7 @@
         <span id="cart-count">0 Gold Plates Selected</span>
         <span id="cart-total">Grand Total: ₹0</span>
     </div>
-    <button class="view-cart-btn" type="button" style="pointer-events: none;">Review Order 👑</button>
+    <button class="view-cart-btn"onclick="openCartModal()" type="button" style="pointer-events: none;">Review Order 👑</button>
 </div>
 
     <div id="cart-modal" class="modal-overlay" style="display: none !important; position: fixed; z-index: 99999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.85);"></div>
@@ -108,7 +109,7 @@
                     </div>
                     <div style="display: flex; width: 100%; gap: 10px;">
                         <button class="reset-order-btn" style="flex: 1;" onclick="backToStep2Registration()">⬅️ Edit Info</button>
-                        <button class="place-order-btn" style="flex: 2; background: #218c74; color: white; font-weight: bold;" onclick="placeFinalOrderWithPayment()">Paid & Send Order To Kitchen 🍽️</button>
+                        <button onclick="placeFinalOrderWithPayment(event)" style="flex: 2; background: #218c74; color: white; font-weight: bold;" onclick="placeFinalOrderWithPayment()">Paid & Send Order To Kitchen 🍽️</button>
                     </div>
                 </div>
             </div>
@@ -140,5 +141,44 @@
     </div>
 
     <script src="script.js"></script>
+    <!-- THANK YOU MODAL -->
+<div id="thank-you-modal" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+z-index:999999;
+justify-content:center;
+align-items:center;
+">
+
+    <div style="
+    background:#111;
+    padding:40px;
+    border:2px solid gold;
+    border-radius:20px;
+    text-align:center;
+    max-width:400px;
+    box-shadow:0 0 25px rgba(255,215,0,0.4);
+    ">
+
+        <h1 style="color:gold; font-size:32px;">
+            🎉 Order Successful
+        </h1>
+
+        <p style="color:white; font-size:18px; margin-top:15px;">
+            Thank You For Dining With Maa Restaurant 🍽️
+        </p>
+
+        <p style="color:#ccc; margin-top:10px;">
+            Your delicious order is now being prepared in the kitchen 👨‍🍳
+        </p>
+
+    </div>
+
+</div>
 </body>
 </html>
