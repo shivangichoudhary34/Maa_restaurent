@@ -1,4 +1,5 @@
 
+
 // ==========================================
 // 1. ROYAL MENU DATABASE & STATE MANAGEMENT
 // ==========================================
@@ -380,37 +381,74 @@ function placeFinalOrderWithPayment(event) {
     globalWhatsAppURL = `https://api.whatsapp.com/send?phone=${restaurantWhatsapp}&text=${encodeURIComponent(messageText)}`;
 
     // 🌟 STEP 1: Pehle payment modal window ko close karo
-    closeCartModal();
     
-    // 🌟 STEP 2: Website par "Thank You" modal panel ko turant display karo
-    const thankYouModal = document.getElementById("thank-you-modal");
-    if (thankYouModal) {
-        thankYouModal.style.setProperty("display", "block", "important");
-    }
+   
+    // Cart modal close
 
-    // 🌟 STEP 3: 1 second ke gap ke baad automatically WhatsApp window open ho jayegi
-    setTimeout(() => {
+    // Close cart modal
+closeCartModal();
+
+// Create popup dynamically
+const popup = document.createElement("div");
+
+popup.innerHTML = `
+    <div style="
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.85);
+        z-index:999999;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    ">
+
+        <div style="
+            background:#111;
+            padding:40px;
+            border-radius:20px;
+            border:2px solid gold;
+            text-align:center;
+            color:white;
+            width:320px;
+            box-shadow:0 0 30px rgba(255,215,0,0.4);
+        ">
+
+            <h1 style="color:gold;">
+                🎉 Order Successful
+            </h1>
+
+            <p style="margin-top:15px;">
+                Thank You For Ordering From Maa Restaurant 🍽️
+            </p>
+
+            <p style="color:#ccc; margin-top:10px;">
+                Your order is being prepared...
+            </p>
+
+        </div>
+
+    </div>
+`;
+
+document.body.appendChild(popup);
+
+// Open WhatsApp after 5 sec
+setTimeout(() => {
 
     redirectToWhatsApp();
 
-    const thankYouModal = document.getElementById("thank-you-modal");
+    popup.remove();
 
-    if(thankYouModal){
-        thankYouModal.style.display = "none";
-    }
-
-}, 4000);
+}, 5000);
 }
 
 function redirectToWhatsApp() {
-
-    if(globalWhatsAppURL && globalWhatsAppURL !== ""){
-
+    if(globalWhatsAppURL && globalWhatsAppURL !==""){
         window.open(globalWhatsAppURL, "_blank");
-
-    } else {
-
-        alert("WhatsApp order link not generated!");
-
+    } else{
+        alert("whatsApp order link not generated!");
     }
 }
