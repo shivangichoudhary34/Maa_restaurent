@@ -1,4 +1,5 @@
 
+
 /* Reset & Luxury Variables */
 * {
     margin: 0;
@@ -399,4 +400,66 @@ body {
 .reset-order-btn:hover {
     background: rgba(231, 76, 60, 0.1);
     box-shadow: 0 0 10px rgba(231, 76, 60, 0.2);
+}
+
+/* 👑 FIXING MODAL LAYERS AND CLICK BLOCKS */
+.modal-overlay {
+    position: fixed !important;
+    z-index: 999999 !important; /* Isko floating bar se upar rakhne ke liye */
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #0c0c0c !important;
+    border: 1px solid rgba(212, 175, 55, 0.4) !important;
+    margin: 5vh auto !important;
+    padding: 25px !important;
+    width: 90% !important;
+    max-width: 480px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    z-index: 1000000 !important;
+}
+
+/* Floating cart ko modal khulne par piche dabane ke liye */
+.floating-cart {
+    z-index: 99991 !important; /* Modal ke z-index se kam */
+}
+
+/* Ensure inputs are always clickable */
+#step-2-registration-view input, 
+#step-2-registration-view textarea,
+#step-2-registration-view button {
+    position: relative !important;
+    z-index: 9999999 !important;
+    pointer-events: auto !important;
+    cursor: text !important;
+}
+#cart-modal{
+    z-index: 9999;
+}
+
+#cart-view{
+    position: fixed;
+    z-index: 10000;
+}
+#cart-modal{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+#cart-view{
+    position: fixed;
+    z-index: 100000;
+}
+
+#step-3-payment-view{
+    pointer-events: auto;
 }
